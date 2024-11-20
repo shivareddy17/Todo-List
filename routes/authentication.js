@@ -31,19 +31,26 @@ res.json({
 authRouter.post("/signin",async (req,res)=>{
     const {email,password}=req.body
     console.log(secret)
+    try{
     const user=await userModel.findOne({
         email
     })
+
     const hpass= await bcrypt.compare(password,user.password);
     if(user&&hpass){
+        const token=jwt.sign({id:user._id},secret)
     res.json({
-        msg:"signin endpoint called"
+        
+        token
     })}else{
         res.json({
-            msg:"not signed"
+            msg:"signin faled"
 
         })
     }
+}catch(e){
+    console.log(e)
+}
 })
 
 module.exports={
