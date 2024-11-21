@@ -4,7 +4,6 @@ require("dotenv").config();
 const {authRouter}=require("./routes/authentication")
 const {todoRouter}=require("./routes/todos")
 const mongoose=require("mongoose");
-
 app.use(express.json());
 
 app.use("/user",authRouter);
