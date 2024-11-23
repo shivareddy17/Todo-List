@@ -65,8 +65,11 @@ todoRouter.put("/:id",authmidlleware,async(req,res)=>{
 })
 todoRouter.delete("/:id",authmidlleware,async ()=>{
     const id=req.params
+    console.log(id)
     try{
-    const deltodo=await todoModel.delete({_id:id})
+        
+    const deltodo=await todoModel.deleteOne({_id:id})
+    console.log(deltodo)
     if(deltodo){
         res.json({
             msg:"todo sucessfully deleted"
